@@ -1,38 +1,29 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { Button } from "@mui/material";
+import { Button, IconButton, useMultiTheme } from "@federicorz98/multi";
+import { Box, Stack, Typography } from "@mui/material";
+import { Moon, Sun } from "@phosphor-icons/react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { toggleThemeMode, isDarkMode } = useMultiTheme();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button
-          onClick={() => setCount((count) => count + 1)}
-          variant="contained"
-        >
-          count is {count}
-        </Button>
+    <Stack display="flex" m={4}>
+      <Box flex={1} gap={4} mt={4} display="flex">
+        <IconButton onClick={toggleThemeMode}>
+          {isDarkMode ? (
+            <Sun size={18} weight="regular" cursor="pointer" />
+          ) : (
+            <Moon size={18} weight="regular" cursor="pointer" />
+          )}
+        </IconButton>
+      </Box>
 
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <Typography mt={4}>Buttons</Typography>
+      <Box flex={1} gap={4} mt={2} display="flex">
+        <Button label="contained" variant="contained" />
+        <Button label="outlined" variant="outlined" />
+        <Button label="text" variant="text" />
+      </Box>
+    </Stack>
   );
 }
 
